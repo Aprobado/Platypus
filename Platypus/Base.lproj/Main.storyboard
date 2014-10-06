@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FgT-FB-aMn">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p4C-tT-8hG">
+                                <rect key="frame" x="410" y="10" width="60" height="60"/>
+                                <subviews>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="120" verticalHuggingPriority="120" ambiguous="YES" misplaced="YES" image="authorIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="HHm-fb-koD">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
+                                        </accessibility>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="HHm-fb-koD" secondAttribute="centerY" id="XOX-Bb-rrK"/>
+                                    <constraint firstAttribute="centerX" secondItem="HHm-fb-koD" secondAttribute="centerX" id="rt8-2I-Shh"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="FgT-FB-aMn" secondAttribute="bottom" id="7ux-nt-QHG"/>
+                            <constraint firstItem="FgT-FB-aMn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Bwg-qu-ym2"/>
+                            <constraint firstItem="p4C-tT-8hG" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="O9r-Vw-5r6"/>
+                            <constraint firstItem="FgT-FB-aMn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="P3y-Dj-oq2"/>
+                            <constraint firstAttribute="trailing" secondItem="p4C-tT-8hG" secondAttribute="trailing" constant="10" id="b0F-wg-coI"/>
+                            <constraint firstAttribute="trailing" secondItem="FgT-FB-aMn" secondAttribute="trailing" id="fZ4-DT-zFq"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="authorIcon" destination="HHm-fb-koD" id="1he-AS-1aU"/>
+                        <outlet property="webView" destination="FgT-FB-aMn" id="x5N-xo-Q5w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="authorIcon.png" width="80" height="80"/>
+    </resources>
+</document>
