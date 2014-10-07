@@ -253,14 +253,24 @@
     [uselessFiles removeAllObjects];
 }
 
-- (NSString *)getIndexPathOfBook:(NSString *)bookName {
-    NSString *indexPath = [[FileManager booksFolderPath] stringByAppendingPathComponent:bookName];
-    indexPath = [indexPath stringByAppendingPathComponent:@"index.html"];
-    return indexPath;
++ (NSString *)getIndexPathOfBook:(NSString *)bookName {
+    NSString *bookPath = [[FileManager booksFolderPath] stringByAppendingPathComponent:bookName];
+    
+    // TODO: Add all possible default home pages
+    NSArray *filePriorityList = @[@"page.html", @"index.html", @"index.htm"];
+    
+    for (NSString *file in filePriorityList) {
+        NSString *filePath = [bookPath stringByAppendingPathComponent:file];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            return filePath;
+        }
+    }
+    
+    return bookPath;
 }
 
 - (NSString *)getIndexPathOfLastUpdatedBook {
-    return [self getIndexPathOfBook:lastUpdatedBook];
+    return [FileManager getIndexPathOfBook:lastUpdatedBook];
 }
 
 @end

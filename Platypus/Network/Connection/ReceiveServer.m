@@ -77,8 +77,9 @@ UInt16 const magicNumberReceive = 28473;
 - (void)updateStatus:(NSString *)statusString
 {
     assert(statusString != nil);
-    if (_netService != nil) NSLog(@"[%@] Update server status to: %@", [_netService name], statusString);
-    else NSLog(@"Update server status to: %@", statusString);
+    // update status is spamming a lot
+    // if (_netService != nil) NSLog(@"[%@] Update server status to: %@", [_netService name], statusString);
+    // else NSLog(@"Update server status to: %@", statusString);
 }
 
 - (void)receiveDidStopWithStatus:(NSString *)statusString

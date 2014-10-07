@@ -7,6 +7,7 @@
 //
 
 #import "HtmlGenerator.h"
+#import "FileManager.h"
 
 @implementation HtmlGenerator
 
@@ -48,7 +49,9 @@
 	for (int i = 0; i < booksFolderArray.count; i++) {
 		NSString *folderName = [booksFolderArray objectAtIndex:i];
 		//NSString *bookDiv = [NSString stringWithFormat:@"<tr><td><div class=\"book\"><a href=\"Books/%@/index.html\">%@</a></div></td></tr>", folderName, folderName];
-		NSString *bookDiv = [NSString stringWithFormat:@"<a href=\"Books/%@/index.html\"><span class=\"book\"><p>%@</p></span></a>", folderName, folderName];
+        NSString *indexPath = [FileManager getIndexPathOfBook:folderName];
+        NSString *indexFile = [indexPath lastPathComponent];
+		NSString *bookDiv = [NSString stringWithFormat:@"<a href=\"Books/%@/%@\"><span class=\"book\"><p>%@</p></span></a>", folderName, indexFile, folderName];
 		html = [html stringByAppendingString:bookDiv];
 	}
 	
@@ -63,8 +66,8 @@
     // if there's only one book, send the book path instead
     if (booksFolderArray.count == 1) {
         NSString *bookFolderName = [booksFolderArray objectAtIndex:0];
-        NSString *standaloneBookPath = [NSString stringWithFormat:@"/Books/%@/index.html", bookFolderName];
-        htmlPath = [documentsDirectory stringByAppendingPathComponent:standaloneBookPath];
+        NSString *indexPath = [FileManager getIndexPathOfBook:bookFolderName];
+        htmlPath = indexPath;
     }
     
 	return htmlPath;

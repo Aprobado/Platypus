@@ -12,6 +12,8 @@
 
 + (NSString *)documentsPath;
 + (NSString *)booksFolderPath;
++ (NSString *)getIndexPathOfBook:(NSString *)bookName;
+
 + (NSString *)generateUUIDString;
 + (NSString *)pathForTemporaryFileWithPrefix:(NSString *)prefix;
 + (void)eraseAllFilesInDirectory:(NSString *)directory;
@@ -20,7 +22,7 @@
 - (BOOL)saveData:(NSData *)data AtPath:(NSString *)path;
 - (BOOL)commitReceivedFiles;
 
-- (NSString *)getIndexPathOfBook:(NSString *)bookName;
+
 - (NSString *)getIndexPathOfLastUpdatedBook;
 
 @end
