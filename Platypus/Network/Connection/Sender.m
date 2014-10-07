@@ -121,11 +121,6 @@ enum {
     
     assert(data != nil);
     
-    if (self.networkStream != nil){
-        NSLog(@"stream status: %lu", [self.networkStream streamStatus]);
-        NSLog(@"error sending: %@", [self.networkStream streamError]);
-    }
-    
     assert(self.networkStream == nil);      // don't tap send twice in a row!
     assert(self.fileStream == nil);         // ditto
     
@@ -142,13 +137,8 @@ enum {
     
     // Open a stream to the server, finding the server via Bonjour.  Then configure
     // the stream for async operation.
-    /*
-    if (netService == nil) {
-        // fallback with hardcoded type and name if the sender was not initialized with a netService
-        netService = [[NSNetService alloc] initWithDomain:@"local." type:@"_unknownType._tcp." name:@"A device with no name"];
-    }
-    */
-    //assert(netService != nil);
+    
+    // if we're using a netService:
     
     // Until <rdar://problem/6868813> is fixed, we have to use our own code to open the streams
     // rather than call -[NSNetService getInputStream:outputStream:].  See the comments in
@@ -172,14 +162,11 @@ enum {
     
     self.networkStream = output;
     [self.networkStream setDelegate:self];
-    [self.networkStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+    [self.networkStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     
     [self.networkStream open];
     
-    //NSLog(@"stream status: %lu", [self.networkStream streamStatus]);
     // Tell the UI we're sending.
-    
-    NSLog(@"error sending: %@", [self.networkStream streamError]);
     
     [self sendDidStart];
 }
@@ -205,8 +192,6 @@ enum {
 // An NSStream delegate callback that's called when events happen on our
 // network stream.
 {
-    NSLog(@"sending...");
-    
     assert(aStream == self.networkStream);
     #pragma unused(aStream)
     

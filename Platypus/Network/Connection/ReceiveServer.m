@@ -21,7 +21,7 @@ UInt16 const magicNumberReceive = 28473;
 
 // private properties
 
-@property (nonatomic, assign, readonly ) BOOL               isStarted;
+@property (nonatomic, assign)            BOOL               isStarted;
 @property (nonatomic, assign, readonly ) BOOL               isReceiving;
 @property (nonatomic, assign, readwrite) CFSocketRef        listeningSocket;
 @property (nonatomic, strong, readwrite) NSInputStream *    networkStream;
@@ -107,11 +107,6 @@ UInt16 const magicNumberReceive = 28473;
 #pragma mark * Core transfer code
 
 // This is the code that actually does the networking.
-
-- (BOOL)isStarted
-{
-    return (self.netService != nil);
-}
 
 - (BOOL)isReceiving
 {
@@ -413,6 +408,7 @@ static void AcceptCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef a
     
     if ( success ) {
         assert(port != 0);
+        self.isStarted = YES;
         [self serverDidStartOnPort:port];
     } else {
         [self stopServer:@"Start failed"];
@@ -437,6 +433,8 @@ static void AcceptCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef a
         CFRelease(self->_listeningSocket);
         self->_listeningSocket = NULL;
     }
+    
+    self.isStarted = NO;
     [self serverDidStopWithReason:reason];
 }
 
